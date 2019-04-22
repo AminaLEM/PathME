@@ -1,0 +1,44 @@
+verhaak= read.table('./TCGA_unified_CORE_ClaNC840.txt', sep ='\t', header = F) # genes*samples
+colnames(mydata) # genes * samples
+
+#select only rows associated to genes considered in verhaak classification (842 genes)
+genes_mydata = rownames(mydatGE)
+genes_verhaak = vanhak[,1]
+mymatrix = mydata[,which(genes_mydata %in% genes_verhaak)]
+
+# extract the three first parts of TCGA samples from verhaak samples
+
+sample_verhaak = gsub("-","\\.", as.matrix(vanhak[1,]))
+len = dim(verhaak)[2]
+sample_verhaak= rep(0,len)
+for (i in 1:len)
+  sample_verhaak[i]=substr(sample_verhaak[[i]],1,12)
+
+# select samples from mymatrix that are not considered in verhaak classification
+target_mymatrix = mymatrix[,which(!colnames(mymatrix) %in% sample_verhaak)]
+
+gene_names = rownames(verhaak)
+
+## Replace the class names ["Proneural","Neural","Classical","Mesenchymal"] to be the numbers 1, 2, 3, 4.
+class_names = 1:4
+
+## use cross-validation to estimate the error rates for
+## classifiers of different sizes (different numbers of genes) 
+
+data= as.matrix(vanhak[c(-1,-2),c(-1,-2)])
+class(data) <- "numeric" 
+rownames(data)= gene_names
+cv_out = cvClanc(data, as.numeric(id),active = 1:200)
+
+## View the estimated error rates associated with different feature-set sizes.
+plot(1:200, cv_out$overallErrors, type = "l", lwd = 2, col = "blue", xlab = 
+       "Number of features", ylab = "CV error")
+
+# build the verhaak classifier
+
+train_out = trainClanc(data , as.numeric(id), gene_names)
+build_out = buildClanc(data, as.numeric(id), class_names, train_out, active = 100)
+
+# Predict classes for our samples
+classes_mysamples = predictClanc(data=outsample2  , geneNames=gene_names, fit=build_out)
+
