@@ -1,4 +1,5 @@
- build_contingency=  function(Xmut, group){
+#Build contingency matrix
+build_contingency=  function(Xmut, group){
    
    successsample = length(which(Xmut[group]==1))
    successleftpart=  length(which(Xmut==1))-successsample
@@ -8,15 +9,16 @@
    contingency_table= matrix(c(successsample, successleftpart,failuresamples, failureleftpart), 2, 2)
   return (contingency_table)
  }
+ # Extract rows that contain values < 0.05 to select mutations overpresented in the clustering
  findindexes =  function(arr){
    leng=dim(arr)[2]
    res =  list()
  for (i in 1:leng)
    res= append (res, which(arr[,i] < 0.05))
-   
- 
  return (res)
  }
+ # construct the array of mutations* clusters that contains P-values from fisher exact test with BH correction
+ #it returns mutation overrepresented in certain clusters
  mutation_enrichment =  function(mutations, groups)
  {
   en= dim(mutations)[2] 
