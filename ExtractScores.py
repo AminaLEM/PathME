@@ -1,7 +1,6 @@
-#@title Default title text
 #Amina LEMSARA
 #CONSTANTINE 2  UNIVERSITY
-#518dis
+#2019
 #
 # ==============================================================================
 import tensorflow as tf
