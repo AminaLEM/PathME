@@ -1165,13 +1165,12 @@ if __name__=='__main__':
   #      trials =pickle.load(input)        
    #     trials =pickle.load(input)
 
-    # run the multiView autoencoder by 10 pathways
-  #  lis = [177,169,143,40,14,7,2]
+    # run the multiView autoencoder
     iterator =0
     while iterator == 0 :
-        pathname = pathnames[iterator+201][0:len(pathnames[iterator+201])-1].replace("\\","")
+        pathname = pathnames[iterator+1][0:len(pathnames[iterator+1])-1].replace("\\","")
         pathname = pathname.replace("/","")
-        iterators= iterator+201
+        iterators= iterator+1
         print('iteration', iterator)
         selected_feat_path = selected_features[np.where(selected_features[:,0] == iterators)[0],:]
 
@@ -1350,15 +1349,6 @@ if __name__=='__main__':
 
           del(sae)    
           shapfeat = best_shapfeat
-          dist = distance.euclidean(il23,best_h)
-          if dist < 5:
-              iterator = 1
-
-                  
-              
-          else:
-              iterator = 0
-          print(dist)
           
           fname = 'E:/newflder/inter/coad/SHAPValuescoadesb.pkl'
           pickle.dump(shapfeat,open( fname, "wb" ))       
