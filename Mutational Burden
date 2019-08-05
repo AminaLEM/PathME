@@ -1,0 +1,17 @@
+library(graphite)
+#load NCI pathways
+getpaths <- pathways("hsapiens", "nci")
+mapGeneEntrez= convertIdentifiers(getpaths, "entrez")
+mapGeneSymbol= convertIdentifiers(getpaths, "symbol")
+
+i= 97 #index of pathway
+gsym <- pathwayGraph(mapGeneSymbol@entries[[iiiu]])
+names(getpaths[i])
+path_sym = nodes(gsym)
+path_sym = gsub("SYMBOL:", "", path_sym)
+
+length(path_sym)
+
+MutationalBurden= rowSums(mutations[,colnames(mutations) %in% path_sym])/length(path_sym)
+
+
