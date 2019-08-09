@@ -1182,7 +1182,7 @@ if __name__=='__main__':
         cnv_sel_data = inputcnv[:,cnv_path[:,2].astype(int)-1]
         nameFcnv = nameme[cnv_path[:,2].astype(int)-1]
 ### =============================================================================
-#        print("third source ...")
+        print("third source ...")
         miRNA_nbr=0
         miRNA_path= selected_feat_path[np.where(selected_feat_path[:,1] == 3)[0],:]
         miRNA_nbr= len(miRNA_path)
