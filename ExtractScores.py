@@ -1143,7 +1143,6 @@ if __name__=='__main__':
     
     with open('E:/newflder/data/pathnames.csv', 'r', encoding="ascii", errors="surrogateescape" ) as f:
           pathnames = f.readlines()
-    il23 = np.genfromtxt('E:/coadesb.csv', delimiter =',',skip_header =1)
     act = tf.nn.tanh
     ii=0
   #  fname = 'E:/newflder/autre pc/trials_HPMV_maxepochs1000_max_evals50_tanh.pkl'
@@ -1154,9 +1153,7 @@ if __name__=='__main__':
 #    nameme= np.genfromtxt('E:/newflder/data/nameme_coad.csv', dtype  = np.unicode_, delimiter =',',skip_header =1)
 #    namemi= np.genfromtxt('E:/newflder/data/namemi_coad.csv', dtype  = np.unicode_, delimiter =',',skip_header =1)
     input= open(fname, 'rb')
-    for iii in range(51):
-        trials =pickle.load(input)
-        print(iii)
+
       #  print(pathnames[iii])
 #    trials =pickle.load(input)
 
@@ -1166,7 +1163,7 @@ if __name__=='__main__':
 
     # run the multiView autoencoder
     iterator =0
-    while iterator == 0 :
+    for iterator in range(212) :
         pathname = pathnames[iterator+1][0:len(pathnames[iterator+1])-1].replace("\\","")
         pathname = pathname.replace("/","")
         iterators= iterator+1
@@ -1209,7 +1206,7 @@ if __name__=='__main__':
         n_hidden2=cnv_nbr//2+1
         n_hidden3=miRNA_nbr//2+1
         if mrna_nbr >1 or cnv_nbr >1 or miRNA_nbr>1:
-      #    trials =pickle.load(input)
+          trials =pickle.load(input)
           best_loss=1000   
 
           best = trials.best_trial['result']['params']
