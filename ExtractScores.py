@@ -313,7 +313,7 @@ class MutiViewAutoencoder():
 #------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------
-    def cross_validation(self, params):
+    def Main(self, params):
 
         #retrieve parameters
         self.batch_size = params['batch_size']
@@ -358,11 +358,9 @@ class MutiViewAutoencoder():
         self.input2,self.output2 = self.corrupt(self.training_data2)
         self.input3,self.output3 = self.corrupt(self.training_data3)
 
-        # cross-validation
        
         loss=0
 
-            #reset tensor graph after each cross_validation run
         tf.reset_default_graph()
             
             
@@ -685,7 +683,7 @@ class MutiViewAutoencoder2():
 #------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------
-    def cross_validation(self, params):
+    def Main(self, params):
 
         #retrieve parameters
         self.batch_size = params['batch_size']
@@ -731,11 +729,9 @@ class MutiViewAutoencoder2():
         self.input1,self.output1 = self.corrupt(self.training_data1)
         self.input2,self.output2 = self.corrupt(self.training_data2)
 
-        # cross-validation
        
         loss=0
 
-            #reset tensor graph after each cross_validation run
         tf.reset_default_graph()
             
             
@@ -1037,7 +1033,7 @@ class MutiViewAutoencoder1():
 #------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------
 #------------------------------------------------------------------------------------------------------------
-    def cross_validation(self, params):
+    def Main(self, params):
 
         #retrieve parameters
         self.batch_size = params['batch_size']
@@ -1079,11 +1075,9 @@ class MutiViewAutoencoder1():
 
         self.input1,self.output1 = self.corrupt(self.training_data1)
 
-        # cross-validation
        
         loss=0
 
-            #reset tensor graph after each cross_validation run
         tf.reset_default_graph()
             
             
@@ -1245,7 +1239,7 @@ if __name__=='__main__':
 #             get the loss of training the model on test data
           if mrna_nbr >1 or cnv_nbr >1 or miRNA_nbr>1:
 
-            loss,h,shapfeat= sae.cross_validation(best)
+            loss,h,shapfeat= sae.Main(best)
             if loss< best_loss:
                    best_oss =loss
                    best_h = h
