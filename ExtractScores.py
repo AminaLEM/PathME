@@ -1204,7 +1204,7 @@ if __name__=='__main__':
           best_loss=1000   
 
           best = trials.best_trial['result']['params']
-        for ss in range(1):
+        for ss in range(20):
           if mrna_nbr  >1 and miRNA_nbr<2 and cnv_nbr<2:
               sae=   MutiViewAutoencoder1(mrna_sel_data, activation = act  )
 
