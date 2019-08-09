@@ -4,7 +4,6 @@ library(graphite)
  mapGeneEntrez= convertIdentifiers(getpaths, "entrez")
  mapGeneSymbol= convertIdentifiers(getpaths, "symbol")
 
-# load our datasets mRNA,miRNA and DNA methylation 
  mapping1 <- function(col_name) {
    sym_ID = matrix(ncol = 1, nrow=length(col_name))
    for (i in 1 : length(col_name))
@@ -14,9 +13,11 @@ library(graphite)
    return (sym_ID)
  }
  
- #start example 
+# load our datasets mRNA,miRNA and DNA methylation 
  
  load(GBM_ProcessedData)
+
+
  miRNA_target= read.csv( 'E:/newflder/data/mirTarget.csv',header=FALSE)
  gene_comp= t(read.csv( 'E:/newflder/data/gene_comp.csv',header=FALSE))
  
