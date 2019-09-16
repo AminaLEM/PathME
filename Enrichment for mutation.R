@@ -29,6 +29,7 @@ build_contingency=  function(Xmut, group){
   for (n in 1:grp)
   {
   cluster=list()
+  len = dim(mutations)[2]
   for (j in 1:len)
   {
   contingency_table= build_contingency(mutations[,j], which(groups==n))
