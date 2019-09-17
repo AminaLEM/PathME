@@ -30,7 +30,7 @@ target_mymatrix = mymatrix[,which(!colnames(mymatrix) %in% sample_verhaak)]
 
 ## Replace the class names ["Proneural","Neural","Classical","Mesenchymal"] to be the numbers in 1:4.
 class_names = 1:4
-id = as.integer(factor(classes))
+id = as.integer(factor(classesIN[,2]))
 ## use cross-validation to estimate the error rates for
 ## classifiers of different sizes (different numbers of genes) 
 data= as.matrix(vrhCoreGE)
@@ -52,9 +52,10 @@ verhaakclasses= matrix(NA,273,2)
 
 for (i in 1:273)
 {  verhaakclasses[i,1] = colnames(mymatrix)[i]
-  if(colnames(mymatrix)[i] %in% sample_verhaak)
-  verhaakclasses[i,2] = classesIN[which(classesIN[,1] %in% colnames(mymatrix)[i]),2]
-  
- else
-    verhaakclasses[i,2]= classes_mysamples[which(colnames(target_mymatrix) %in% colnames(mymatrix)[i])]
+if(colnames(mymatrix)[i] %in% sample_verhaak)
+  verhaakclasses[i,2] = id[which(classesIN[,1] %in% colnames(mymatrix)[i])]
+
+else
+  verhaakclasses[i,2]= classes_mysamples[which(colnames(target_mymatrix) %in% colnames(mymatrix)[i])]
 }
+chisq.test(table(group,verhaakclasses[,2]))$p.value
