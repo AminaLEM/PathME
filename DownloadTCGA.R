@@ -1,4 +1,4 @@
-# gotten from https://github.com/CamilaDuitama/MasterThesis/blob/master/DownloadTCGA.R
+# Forked from CamilaDuitama/MasterThesis https://github.com/CamilaDuitama/MasterThesis/blob/master/DownloadTCGA.R
 library(RTCGAToolbox)
 library(RTCGA)
 library(TCGAbiolinks)
