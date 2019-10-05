@@ -1,3 +1,5 @@
+library(NMF)
+library(Survival)
 beta = 0.01
 nrun =30
 #load our resulted matrix of [patients X pathways] and clinical data
@@ -11,7 +13,7 @@ data_matrix = data_matrix +  abs(min(data_matrix))
 data_matrix = data_matrix/max(data_matrix)
 
 # Estimate the rank of factorization by boxplots representing cc disperssion against multiple randomizations
-estimate_rank(data_matrix, nb_permutation = 40, interval = seq(2,9))
+estRank = estimateRank(data_matrix, nb_permutation = 40, interval = seq(2,9))
 rank = 2
 #Apply sNMF to our new data
 fit_sNMF= nmf(t(data_matrix),rank, method='snmf/r', nrun=nrun, beta = beta)
