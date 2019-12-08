@@ -1,3 +1,51 @@
+# BRCA LIU endpoints
+
+endpoints = read.csv("G:/brcadata/clinicaledpointBRCA.csv", sep =",", header = T)
+endpoints = endpoints[which(endpoints$bcr_patient_barcode%in% clinical_data$bcr_patient_barcode),]
+
+# GMB LIU endpoints
+samples = rownames(clinicda)
+endpoints = read.csv("G:/gbm/endpoints.csv", sep =";", header = T)
+endpoints = endpoints[which(endpoints$bcr_patient_barcode %in% rownames(clinicda)),]
+endpoints2=endpoints
+
+for (i in 1:273)
+{
+  endpoints2[i,] = endpoints[which(endpoints$bcr_patient_barcode == samples[i]),]
+}
+endpoints= endpoints2
+
+#LUSC LIU endpoints
+
+samples = substr(survival_data[,1],1,12)
+endpoints = read.csv("G:/lusc/endpoints.csv", sep =";", header = T)
+endpoints = endpoints[which(endpoints$bcr_patient_barcode %in% samples),]
+endpoints2=endpoints
+
+for (i in 1:106)
+{
+  endpoints2[i,] = endpoints[which(endpoints$bcr_patient_barcode == samples[i]),]
+}
+endpoints= endpoints2
+
+
+#CRC LIU endpoints
+
+samples = toupper(gsub("\\.","-",clinc[,1]))
+endpoints = read.csv("G:/crc/endpoints.csv", sep =";", header = T)
+endpoints = endpoints[which(endpoints$bcr_patient_barcode %in% samples),]
+endpoints2=rbind(endpoints, endpoints[1,])
+
+for (i in 1:294)
+{
+  print(i)
+  if(exists(samples[i], where=as.matrix(endpoints$bcr_patient_barcode)))
+  endpoints2[i,] = endpoints[which(endpoints$bcr_patient_barcode == samples[i]),]
+  else
+    endpoints2[i,] = rep(NA,26)
+}
+endpoints= endpoints2
+
 
 # clinical and biological relevence analysis based on LIU et al. clinical data
 clinical_data = clinical_data[which(as.matrix(clinical_data[,2])%in% as.matrix(samples)[,1]),]
