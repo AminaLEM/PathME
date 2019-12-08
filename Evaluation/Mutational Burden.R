@@ -16,5 +16,8 @@ MutationalBurden2= rowSums(mutations[which (group == 2),colnames(mutations) %in%
 MutationalBurden3= rowSums(mutations[which (group == 3),colnames(mutations) %in% path_sym])/length(path_sym)
 MutationalBurden4= rowSums(mutations[which (group == 4),colnames(mutations) %in% path_sym])/length(path_sym)
 write.csv(rbind(as.matrix(MutationalBurden1),as.matrix(MutationalBurden2),as.matrix(MutationalBurden3),as.matrix(MutationalBurden4)), "D:/mb1.csv", row.names = F)
+# MutationalBurden2[,2] contains the associated subtypes to samples
+ktest= kruskal.test(  MutationalBurden2[,1] ~ MutationalBurden2[,2])
+# p-values were then adjusted per desease using p.adjust({list of p-values associated to the top pathways} , 'BH')
 
 
