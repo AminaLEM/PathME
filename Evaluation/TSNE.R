@@ -1,0 +1,8 @@
+library(M3C)
+library(NMF)
+clusterCo = as.numeric(as.vector(predict(gr4, what= 'consensus')))
+clusterCo= paste("Subtype " , as.character(clusterCo))
+TSNEGE <- tsne(t(as.matrix(inputge)), labels=as.factor(clusterCo))
+TSNEME <- tsne(t(as.matrix(inputme)), labels=as.factor(clusterCo))
+TSNEMI <- tsne(t(as.matrix(inputmi)), labels=as.factor(clusterCo))
+TSNE <- tsne(t(as.matrix(newfeatures)) ,labels=as.factor(clusterCo))
